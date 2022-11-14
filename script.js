@@ -7,8 +7,6 @@ let lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n
 let upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]; //upper case letter array
 let special = ["@", "%", "+", "/", "'", "!", "#", "$", "^", "?", ":", ",", ")", "(", "}", "{", "]", "[", "~", "-", "_", "."]; //special characters array
 let password = [];
-let maximum = 50;
-let minimum = 8;
 
 // Assignment code here
 
@@ -21,6 +19,11 @@ function generatePassword() {
   let passwordLength = window.prompt("Choose a number between 8-50 for your password length.");
   //TODO: validate that they entered a number between 8 and 50
 
+  if (passwordLength < 8 || passwordLength > 50 || isNaN(passwordLength)) {
+    alert("You must choose a number between 8 and 50");
+    return null;
+  }
+
   //ask if they want numbers
   let isNumbers = window.confirm("Would you like to include numbers?");
   //ask if they want lower case letters
@@ -29,6 +32,11 @@ function generatePassword() {
   let isUpper = window.confirm("Would you like to include upper case letters?");
   //ask if they want special characters
   let isSpecial = window.confirm("Would you like to include special characters?");
+
+  if (isNumbers === false && isSpecial === false && isLower === false && isUpper === false) {
+    alert("You must choose at least one option");
+    return null;
+  }
 
   //build up a password using random numbers as long as the length
   password = [];
