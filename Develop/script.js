@@ -6,10 +6,9 @@ let number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]; //number array
 let lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; //lower case letter array
 let upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]; //upper case letter array
 let special = ["@", "%", "+", "/", "'", "!", "#", "$", "^", "?", ":", ",", ")", "(", "}", "{", "]", "[", "~", "-", "_", "."]; //special characters array
-let passwordLength = 5;
-let ranNumber = randomNumber(10);
-console.log(ranNumber);
 let password = [];
+let maximum = 50;
+let minimum = 8;
 
 // Assignment code here
 
@@ -23,7 +22,7 @@ function generatePassword() {
   //TODO: validate that they entered a number between 8 and 50
 
   //ask if they want numbers
-  let isNumber = window.confirm("Would you like to include numbers?");
+  let isNumbers = window.confirm("Would you like to include numbers?");
   //ask if they want lower case letters
   let isLower = window.confirm("Would you like to include lower case letters?");
   //ask if they want upper case letters
@@ -33,7 +32,8 @@ function generatePassword() {
 
   //build up a password using random numbers as long as the length
   password = [];
-  if (isNumber === true) {
+  if (isNumbers === true) {
+    //TODO: pick one random number and push it into password
     allChoices = allChoices.concat(number);
   }
   if (isLower === true) {
@@ -43,22 +43,27 @@ function generatePassword() {
     allChoices = allChoices.concat(upper);
   }
   if (isSpecial === true) {
-    allChoices = allChoices.concat(specialCharacters);
+    allChoices = allChoices.concat(special);
   }
 
   for (let i = 0; i < passwordLength + 1; i++) {
-    let maximun = allChoices.length - 1;
+    let maximum = allChoices.length - 1;
     let minimum = 0;
-    let ranNumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
-    password.push(allChoices[ranNumber]);
+    let rnd = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+    password.push(allChoices[rnd]);
   }
+
+  return password;
+}
+
+function getRandomArbiturary(min, max) {
+  return Math.floor(Math.random() * max);
 }
 
 // Write password to the #password input
 function writePassword() {
   generatePassword();
   let passwordText = document.querySelector("#password");
-
   passwordText.value = password.join(" ");
 }
 
