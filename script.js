@@ -23,7 +23,7 @@ function generatePassword() {
     alert("You must choose a number between 8 and 50");
     return null;
   }
-
+  console.log(passwordLength);
   //ask if they want numbers
   let isNumbers = window.confirm("Would you like to include numbers?");
   //ask if they want lower case letters
@@ -54,18 +54,15 @@ function generatePassword() {
     allChoices = allChoices.concat(special);
   }
 
-  for (let i = 0; i < passwordLength + 1; i++) {
+  for (let i = 0; i < passwordLength; i++) {
     let maximum = allChoices.length - 1;
     let minimum = 0;
     let rnd = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
     password.push(allChoices[rnd]);
+    console.log(password);
   }
 
   return password;
-}
-
-function getRandomArbiturary(min, max) {
-  return Math.floor(Math.random() * max);
 }
 
 // Write password to the #password input
